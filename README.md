@@ -3,6 +3,7 @@
 ## Description
 
 This application is to show a visual transcript to the right side of the video so the user can see the list of subtitles in one place, search the transcripts for a specific area, and then jump to that section of the video directly by clicking on the correct transcript.
+See the [screenshot](https://prnt.sc/1657b7k) of the application: 
 
 ## Development server
 
