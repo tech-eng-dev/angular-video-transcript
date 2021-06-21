@@ -1,0 +1,28 @@
+<div class="video-widget">
+  <div class="video-container">
+    <video #video class="video-js vjs-big-play-centered" controls></video>
+  </div>
+  <div id="transcript" class="transcript">
+    <mat-select [(value)]="lang" (selectionChange)="onSubTitleChange($event)">
+      <mat-option *ngFor="let subtitle of subtitles" [value]="subtitle.title">{{subtitle.title}} Transcript (auto-generated)</mat-option>
+    </mat-select>
+    <div class="find-line">
+      <div>Find:&nbsp;</div>
+      <input class="find-input" type="text" [ngModel]="searchText" (ngModelChange)="onSearchTextChange($event)">
+    </div>
+    <div class="move-btns-area" *ngIf="searchText?.length > 2">
+      <button mat-raised-button [disabled]="!cueTimes?.length" (click)="prev()">Prev</button>
+      <div>&nbsp;&nbsp;Total: {{activeCues.length}}&nbsp;&nbsp;</div>
+      <button mat-raised-button (click)="next()">Next</button>
+      &nbsp;&nbsp;
+      <button mat-raised-button (click)="clear()">Clear</button>
+    </div>
+    <mat-selection-list [(ngModel)]="cueTimes" (ngModelChange)="onCueChange($event)" [multiple]="false">
+      <mat-list-option *ngFor="let cue of activeCues | transcriptSearch: searchText" [value]="cue.startTime">
+        <div class="transcript-line" >
+          <span class="transcript-timestamp">{{secondsToTime(cue.startTime)}}</span><span class="transcript-text">{{cue.text}}</span>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>
